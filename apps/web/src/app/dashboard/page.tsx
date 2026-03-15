@@ -1022,7 +1022,7 @@ function KeysTab({
 
 function BillingTab({
   billing,
-  onRefresh,
+  onRefresh: _onRefresh,
 }: {
   billing: Billing | null;
   onRefresh: () => void;
