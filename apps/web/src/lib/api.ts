@@ -33,18 +33,10 @@ async function apiFetch(path: string, options: RequestInit = {}, auth = true) {
 }
 
 export const signup = (email: string, password: string, name?: string) =>
-  apiFetch(
-    "/api/auth/signup",
-    { method: "POST", body: JSON.stringify({ email, password, name }) },
-    false
-  );
+  apiFetch("/api/auth/signup", { method: "POST", body: JSON.stringify({ email, password, name }) }, false);
 
 export const signin = (email: string, password: string) =>
-  apiFetch(
-    "/api/auth/signin",
-    { method: "POST", body: JSON.stringify({ email, password }) },
-    false
-  );
+  apiFetch("/api/auth/signin", { method: "POST", body: JSON.stringify({ email, password }) }, false);
 
 export const getBillingStatus = () => apiFetch("/api/billing/status");
 export const getKeys = () => apiFetch("/api/auth/keys");
@@ -56,10 +48,9 @@ export const getHistory = (limit = 10) =>
   apiFetch(`/api/search/history?limit=${limit}`);
 export const runSearch = (body: object) =>
   apiFetch("/api/search", { method: "POST", body: JSON.stringify(body) });
+export const previewCost = (body: object) =>
+  apiFetch("/api/search/cost", { method: "POST", body: JSON.stringify(body) });
 export const createCheckout = (pack: string) =>
-  apiFetch("/api/billing/checkout", {
-    method: "POST",
-    body: JSON.stringify({ pack }),
-  });
+  apiFetch("/api/billing/checkout", { method: "POST", body: JSON.stringify({ pack }) });
 export const createPortal = () =>
   apiFetch("/api/billing/portal", { method: "POST" });
