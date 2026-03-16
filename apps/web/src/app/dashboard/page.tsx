@@ -33,7 +33,7 @@ const C = {
 };
 
 const s: Record<string, React.CSSProperties> = {
-  shell: { minHeight: "100vh", display: "flex", flexDirection: "column", background: C.bg, fontFamily: "'Inter', system-ui, sans-serif", color: C.text },
+  shell: { minHeight: "100vh", display: "flex", flexDirection: "column", background: C.bg, fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif", color: C.text },
   nav: { borderBottom: `1px solid ${C.border}`, padding: "0 24px", display: "flex", alignItems: "center", justifyContent: "space-between", height: 52, background: C.surface },
   navLeft: { display: "flex", alignItems: "center" },
   wordmark: { fontSize: 15, fontWeight: 600, letterSpacing: "-0.02em", color: C.white, marginRight: 28 },
@@ -327,12 +327,50 @@ function SearchTab({ onSearchDone }: { onSearchDone: () => void }) {
   );
 }
 
+function ShareButton({ requestId }: { requestId: string }) {
+  const [copied, setCopied] = useState(false);
+  const share = async () => {
+    const url = `${window.location.origin}/results/${requestId}`;
+    await navigator.clipboard.writeText(url);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+  return (
+    <button
+      onClick={share}
+      style={{
+        ...s.btn, ...s.btnGhost,
+        fontSize: 12, padding: "6px 12px",
+        display: "flex", alignItems: "center", gap: 6,
+        color: copied ? C.green : C.textMuted,
+        border: copied ? `1px solid rgba(34,197,94,0.3)` : `1px solid ${C.border}`,
+      }}
+    >
+      {copied ? (
+        <>✓ Copied</>
+      ) : (
+        <>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+            <polyline points="16 6 12 2 8 6" />
+            <line x1="12" y1="2" x2="12" y2="15" />
+          </svg>
+          Share
+        </>
+      )}
+    </button>
+  );
+}
+
 function SearchResults({ result }: { result: SearchResult }) {
   return (
     <div style={s.card}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
         <span style={s.sectionTitle}>{result.problems?.length ?? 0} problems · {result.postsAnalyzed} posts · {result.creditsUsed} credit{result.creditsUsed > 1 ? "s" : ""} used</span>
-        <span style={{ fontSize: 12, color: C.textMuted }}>{result.credits?.remaining} remaining</span>
+        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+          <ShareButton requestId={result.requestId} />
+          <span style={{ fontSize: 12, color: C.textMuted }}>{result.credits?.remaining} remaining</span>
+        </div>
       </div>
       {result.summary && (
         <div style={{ fontSize: 13, color: C.textMuted, lineHeight: 1.75, marginBottom: 20, background: "#0c0c0c", border: `1px solid ${C.border}`, borderRadius: C.radiusSm, padding: "14px 16px" }}>

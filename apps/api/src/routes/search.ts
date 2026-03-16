@@ -7,6 +7,7 @@ import { scrapeCustomUrls } from "../services/customScraper.js";
 import { analyzeProblems } from "../services/analyzer.js";
 import { calculateCreditCost, checkQuerySafety, sanitizeQuery } from "../lib/credits.js";
 import { getCacheKey, getCached, setCached } from "../lib/cache.js";
+import { sendLowCreditsEmail } from "../lib/email.js";
 
 const router = Router();
 
@@ -194,6 +195,17 @@ router.post("/", async (req: AuthenticatedRequest, res: Response) => {
       ]);
 
       const updatedBilling = await prisma.billing.findUnique({ where: { userId: req.userId } });
+
+      // Low credits warning email
+      if (updatedBilling && updatedBilling.credits <= 10) {
+        prisma.user.findUnique({ where: { id: req.userId } }).then((user) => {
+          if (user) {
+            sendLowCreditsEmail(user.email, updatedBilling.credits).catch((err) =>
+              console.error("[search] low credits email failed:", err)
+            );
+          }
+        }).catch(() => {});
+      }
 
       return res.status(200).json({
         requestId: request.id,

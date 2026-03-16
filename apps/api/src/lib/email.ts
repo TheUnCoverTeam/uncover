@@ -114,3 +114,113 @@ export async function sendWelcomeEmail(
 </html>`,
   });
 }
+
+export async function sendLowCreditsEmail(
+  email: string,
+  creditsRemaining: number
+): Promise<void> {
+  await sendEmail({
+    to: email,
+    subject: `Low credits: ${creditsRemaining} search${creditsRemaining === 1 ? "" : "es"} remaining`,
+    html: `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body style="margin:0;padding:0;background:#0a0a0a;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#e0e0e0;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#0a0a0a;padding:48px 0;">
+    <tr>
+      <td align="center">
+        <table width="560" cellpadding="0" cellspacing="0" style="background:#0f0f0f;border:1px solid #1a1a1a;border-radius:12px;overflow:hidden;">
+
+          <!-- Header -->
+          <tr>
+            <td style="padding:28px 36px;border-bottom:1px solid #1a1a1a;">
+              <span style="font-family:'Inter',sans-serif;font-weight:600;font-size:15px;letter-spacing:-0.03em;color:#fff;">Uncover</span>
+            </td>
+          </tr>
+
+          <!-- Body -->
+          <tr>
+            <td style="padding:36px 36px 28px;">
+
+              <!-- Warning indicator -->
+              <div style="display:inline-block;background:rgba(234,179,8,0.08);border:1px solid rgba(234,179,8,0.2);border-radius:8px;padding:8px 14px;margin-bottom:24px;">
+                <span style="font-size:12px;color:#eab308;font-weight:500;letter-spacing:-0.01em;">⚠ Low credits</span>
+              </div>
+
+              <h1 style="font-size:22px;font-weight:700;letter-spacing:-0.04em;color:#fff;margin:0 0 12px;line-height:1.2;">
+                You have ${creditsRemaining} credit${creditsRemaining === 1 ? "" : "s"} left
+              </h1>
+
+              <p style="font-size:14px;color:#555;margin:0 0 28px;line-height:1.75;">
+                Your Uncover account is running low. Top up now to keep your searches running without interruption.
+                Credits never expire — buy once, use anytime.
+              </p>
+
+              <!-- Credit info -->
+              <table width="100%" cellpadding="0" cellspacing="0" style="background:#0c0c0c;border:1px solid #1a1a1a;border-radius:10px;margin-bottom:28px;">
+                <tr>
+                  <td style="padding:16px 20px;border-bottom:1px solid #141414;">
+                    <span style="font-size:11px;color:#333;text-transform:uppercase;letter-spacing:0.08em;font-weight:500;">Credits remaining</span><br/>
+                    <span style="font-size:32px;font-weight:700;letter-spacing:-0.05em;color:#eab308;line-height:1.2;">${creditsRemaining}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding:14px 20px;">
+                    <span style="font-size:13px;color:#444;line-height:1.65;">
+                      1 credit = 1 social search &nbsp;&middot;&nbsp; 2 credits = 1 custom URL search<br/>
+                      Credits never expire
+                    </span>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Packs -->
+              <p style="font-size:12px;color:#333;text-transform:uppercase;letter-spacing:0.08em;margin:0 0 12px;font-weight:500;">Credit packs</p>
+              <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:28px;">
+                <tr>
+                  <td style="padding:10px 14px;background:#0c0c0c;border:1px solid #1a1a1a;border-radius:8px 0 0 8px;text-align:center;">
+                    <div style="font-size:11px;color:#444;margin-bottom:4px;">Starter</div>
+                    <div style="font-size:20px;font-weight:700;color:#fff;letter-spacing:-0.04em;">$5</div>
+                    <div style="font-size:11px;color:#444;margin-top:2px;">50 searches</div>
+                  </td>
+                  <td width="4" style="background:#0a0a0a;"></td>
+                  <td style="padding:10px 14px;background:#111;border:1px solid #2a2a2a;border-radius:0;text-align:center;">
+                    <div style="font-size:11px;color:#555;margin-bottom:4px;">Pro ★</div>
+                    <div style="font-size:20px;font-weight:700;color:#fff;letter-spacing:-0.04em;">$29</div>
+                    <div style="font-size:11px;color:#555;margin-top:2px;">500 searches</div>
+                  </td>
+                  <td width="4" style="background:#0a0a0a;"></td>
+                  <td style="padding:10px 14px;background:#0c0c0c;border:1px solid #1a1a1a;border-radius:0 8px 8px 0;text-align:center;">
+                    <div style="font-size:11px;color:#444;margin-bottom:4px;">Scale</div>
+                    <div style="font-size:20px;font-weight:700;color:#fff;letter-spacing:-0.04em;">$79</div>
+                    <div style="font-size:11px;color:#444;margin-top:2px;">2,000 searches</div>
+                  </td>
+                </tr>
+              </table>
+
+              <a href="${WEB_URL}/dashboard" style="display:inline-block;background:#fff;color:#000;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;letter-spacing:-0.01em;padding:12px 22px;border-radius:8px;text-decoration:none;">
+                Buy credits →
+              </a>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding:20px 36px;border-top:1px solid #141414;">
+              <p style="font-size:11px;color:#2a2a2a;margin:0;line-height:1.8;">
+                Uncover · Built by TheAlxLabs · <a href="${WEB_URL}/dashboard" style="color:#2a2a2a;">Manage account</a>
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`,
+  });
+}

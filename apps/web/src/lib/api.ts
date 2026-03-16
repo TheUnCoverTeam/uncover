@@ -54,3 +54,6 @@ export const createCheckout = (pack: string) =>
   apiFetch("/api/billing/checkout", { method: "POST", body: JSON.stringify({ pack }) });
 export const createPortal = () =>
   apiFetch("/api/billing/portal", { method: "POST" });
+
+export const getPublicResult = (id: string) =>
+  fetch(`${API}/api/results/${id}`).then((r) => r.json());

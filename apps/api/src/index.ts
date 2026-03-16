@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import searchRoutes from "./routes/search.js";
@@ -7,6 +7,7 @@ import stripeRoutes from "./routes/stripe.js";
 import adminRoutes from "./routes/admin.js";
 import redeemRoutes from "./routes/redeem.js";
 import { apiKeyAuth } from "./middleware/auth.js";
+import prisma from "./lib/db.js";
 
 dotenv.config();
 
@@ -88,6 +89,35 @@ app.get("/", (_req, res) => {
 </div>
 </body>
 </html>`);
+});
+
+// Public result lookup — no auth required
+app.get("/api/results/:requestId", async (req: Request, res: Response) => {
+  try {
+    const request = await prisma.request.findUnique({
+      where: { id: req.params.requestId },
+      include: { result: true },
+    });
+    if (!request || request.status !== "completed") {
+      return res.status(404).json({ error: "Result not found" });
+    }
+    return res.status(200).json({
+      requestId: request.id,
+      status: request.status,
+      query: request.query,
+      sources: JSON.parse(request.sources),
+      createdAt: request.createdAt,
+      ...(request.result && {
+        problems: JSON.parse(request.result.problems),
+        summary: request.result.summary,
+        trends: JSON.parse(request.result.trends),
+        postsAnalyzed: JSON.parse(request.result.rawData).length,
+      }),
+    });
+  } catch (error) {
+    console.error("[results] public lookup error:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
 });
 
 // Routes

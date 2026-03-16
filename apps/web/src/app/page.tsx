@@ -17,7 +17,7 @@ export default function Home() {
         <div style={s.navInner}>
           <span style={s.logo}>Uncover</span>
           <div style={s.navLinks}>
-            <a href="#how" style={s.navLink}>Docs</a>
+            <a href="/docs" style={s.navLink}>Docs</a>
             <a href="#pricing" style={s.navLink}>Pricing</a>
             <a href="/login" style={s.navLink}>Sign in</a>
             <a href="/login" style={s.navBtn}>Get started</a>
@@ -34,7 +34,7 @@ export default function Home() {
         </p>
         <div style={s.ctas}>
           <a href="/login" style={s.btnPrimary}>Get started for free</a>
-          <a href="#how" style={s.btnSecondary}>See how it works →</a>
+          <a href="/docs" style={s.btnSecondary}>Read the docs →</a>
         </div>
 
         <div style={s.codeCard}>
@@ -149,7 +149,7 @@ export default function Home() {
         <div style={s.footerInner}>
           <span style={s.footerLogo}>Uncover</span>
           <div style={s.footerLinks}>
-            <a href="#how" style={s.footerLink}>Docs</a>
+            <a href="/docs" style={s.footerLink}>Docs</a>
             <a href="#pricing" style={s.footerLink}>Pricing</a>
             <a href="/login" style={s.footerLink}>Sign in</a>
             <a href="/privacy" style={s.footerLink}>Privacy</a>
@@ -164,55 +164,55 @@ export default function Home() {
 }
 
 const s: Record<string, React.CSSProperties> = {
-  page: { minHeight: "100vh", background: "#0a0a0a", color: "#ededed", fontFamily: "'Inter', system-ui, -apple-system, sans-serif" },
-  nav: { borderBottom: "1px solid #1f1f1f", position: "sticky" as const, top: 0, background: "rgba(10,10,10,0.85)", backdropFilter: "blur(12px)", zIndex: 50 },
+  page: { minHeight: "100vh", background: "#0a0a0a", color: "#ededed", fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif" },
+  nav: { borderBottom: "1px solid #1a1a1a", position: "sticky" as const, top: 0, background: "rgba(10,10,10,0.9)", backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)", zIndex: 50 },
   navInner: { maxWidth: 1100, margin: "0 auto", padding: "0 32px", height: 56, display: "flex", alignItems: "center", justifyContent: "space-between" },
-  logo: { fontSize: 16, fontWeight: 600, letterSpacing: "-0.02em", color: "#fff" },
+  logo: { fontSize: 15, fontWeight: 600, letterSpacing: "-0.03em", color: "#fff" },
   navLinks: { display: "flex", alignItems: "center", gap: 4 },
-  navLink: { fontSize: 14, color: "#777", textDecoration: "none", padding: "6px 12px", borderRadius: 6 },
+  navLink: { fontSize: 14, color: "#666", textDecoration: "none", padding: "6px 12px", borderRadius: 6 },
   navBtn: { fontSize: 13, color: "#000", background: "#fff", padding: "7px 16px", borderRadius: 8, textDecoration: "none", fontWeight: 500, marginLeft: 8 },
   main: { maxWidth: 1100, margin: "0 auto", padding: "96px 32px 80px", textAlign: "center" as const },
-  badge: { display: "inline-block", fontSize: 12, color: "#666", background: "#141414", border: "1px solid #252525", padding: "4px 14px", borderRadius: 20, marginBottom: 28 },
+  badge: { display: "inline-block", fontSize: 12, color: "#555", background: "#111", border: "1px solid #222", padding: "4px 14px", borderRadius: 20, marginBottom: 28, letterSpacing: "-0.01em" },
   h1: { fontSize: "clamp(40px, 6vw, 68px)", fontWeight: 700, letterSpacing: "-0.04em", lineHeight: 1.08, marginBottom: 20, color: "#fff" },
-  sub: { fontSize: 16, color: "#777", lineHeight: 1.7, marginBottom: 36, maxWidth: 500, margin: "0 auto 36px" },
+  sub: { fontSize: 16, color: "#666", lineHeight: 1.7, marginBottom: 36, maxWidth: 500, margin: "0 auto 36px" },
   ctas: { display: "flex", gap: 12, justifyContent: "center", marginBottom: 56, flexWrap: "wrap" as const },
-  btnPrimary: { fontSize: 14, fontWeight: 500, color: "#000", background: "#fff", padding: "10px 22px", borderRadius: 8, textDecoration: "none", display: "inline-block" },
-  btnSecondary: { fontSize: 14, color: "#777", padding: "10px 22px", borderRadius: 8, textDecoration: "none", border: "1px solid #252525", display: "inline-block" },
-  codeCard: { background: "#0f0f0f", border: "1px solid #1f1f1f", borderRadius: 12, overflow: "hidden", maxWidth: 680, margin: "0 auto", textAlign: "left" as const },
-  codeHeader: { padding: "10px 18px", borderBottom: "1px solid #1a1a1a", background: "#0c0c0c" },
-  codeLang: { fontSize: 11, color: "#444", letterSpacing: "0.04em" },
-  code: { fontFamily: "'JetBrains Mono', 'Fira Code', monospace", fontSize: 12, color: "#888", padding: "18px", margin: 0, lineHeight: 1.75, overflowX: "auto" as const },
+  btnPrimary: { fontSize: 14, fontWeight: 500, color: "#000", background: "#fff", padding: "10px 22px", borderRadius: 8, textDecoration: "none", display: "inline-block", letterSpacing: "-0.01em" },
+  btnSecondary: { fontSize: 14, color: "#666", padding: "10px 22px", borderRadius: 8, textDecoration: "none", border: "1px solid #222", display: "inline-block", letterSpacing: "-0.01em" },
+  codeCard: { background: "#0c0c0c", border: "1px solid #1a1a1a", borderRadius: 14, overflow: "hidden", maxWidth: 680, margin: "0 auto", textAlign: "left" as const },
+  codeHeader: { padding: "10px 18px", borderBottom: "1px solid #141414", background: "#0a0a0a", display: "flex", alignItems: "center", gap: 8 },
+  codeLang: { fontSize: 11, color: "#3a3a3a", letterSpacing: "0.06em", textTransform: "uppercase" as const, fontWeight: 500 },
+  code: { fontFamily: "'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace", fontSize: 12, color: "#777", padding: "18px", margin: 0, lineHeight: 1.75, overflowX: "auto" as const },
   section: { borderTop: "1px solid #141414", padding: "80px 0" },
   sectionInner: { maxWidth: 1100, margin: "0 auto", padding: "0 32px" },
   sectionMeta: { textAlign: "center" as const, marginBottom: 52 },
-  sectionTag: { display: "inline-block", fontSize: 11, color: "#444", letterSpacing: "0.1em", textTransform: "uppercase" as const, marginBottom: 14 },
+  sectionTag: { display: "inline-block", fontSize: 11, color: "#3a3a3a", letterSpacing: "0.1em", textTransform: "uppercase" as const, marginBottom: 14, fontWeight: 500 },
   sectionH2: { fontSize: "clamp(24px, 3vw, 36px)", fontWeight: 700, letterSpacing: "-0.03em", color: "#fff", marginBottom: 12 },
-  sectionSub: { fontSize: 15, color: "#666", lineHeight: 1.7, maxWidth: 460, margin: "0 auto" },
-  steps: { border: "1px solid #1a1a1a", borderRadius: 12, overflow: "hidden" },
-  step: { display: "flex", gap: 20, padding: "26px 28px", borderBottom: "1px solid #141414", background: "#0c0c0c", alignItems: "flex-start" },
-  stepN: { width: 26, height: 26, borderRadius: "50%", background: "#161616", border: "1px solid #252525", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11, color: "#555", flexShrink: 0, marginTop: 1 },
+  sectionSub: { fontSize: 15, color: "#555", lineHeight: 1.7, maxWidth: 460, margin: "0 auto" },
+  steps: { border: "1px solid #1a1a1a", borderRadius: 14, overflow: "hidden" },
+  step: { display: "flex", gap: 20, padding: "26px 28px", borderBottom: "1px solid #111", background: "#0c0c0c", alignItems: "flex-start" },
+  stepN: { width: 26, height: 26, borderRadius: "50%", background: "#141414", border: "1px solid #222", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11, color: "#444", flexShrink: 0, marginTop: 1 },
   stepContent: { flex: 1 },
-  stepTitle: { fontSize: 14, fontWeight: 500, color: "#ddd", marginBottom: 5 },
-  stepDesc: { fontSize: 13, color: "#555", lineHeight: 1.65 },
-  sourceGrid: { display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 10 },
-  sourceCard: { background: "#0c0c0c", border: "1px solid #1a1a1a", borderRadius: 12, padding: "26px 22px" },
-  sourceName: { fontSize: 14, fontWeight: 600, color: "#ddd", marginBottom: 8 },
-  sourceDesc: { fontSize: 13, color: "#555", lineHeight: 1.65 },
-  pricingGrid: { display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 10, marginBottom: 20 },
-  priceCard: { background: "#0c0c0c", border: "1px solid #1a1a1a", borderRadius: 12, padding: "26px 22px", display: "flex", flexDirection: "column" as const, gap: 6 },
+  stepTitle: { fontSize: 14, fontWeight: 500, color: "#ddd", marginBottom: 5, letterSpacing: "-0.01em" },
+  stepDesc: { fontSize: 13, color: "#444", lineHeight: 1.65 },
+  sourceGrid: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 10 },
+  sourceCard: { background: "#0c0c0c", border: "1px solid #1a1a1a", borderRadius: 14, padding: "26px 22px" },
+  sourceName: { fontSize: 14, fontWeight: 600, color: "#ddd", marginBottom: 8, letterSpacing: "-0.02em" },
+  sourceDesc: { fontSize: 13, color: "#444", lineHeight: 1.65 },
+  pricingGrid: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 10, marginBottom: 20 },
+  priceCard: { background: "#0c0c0c", border: "1px solid #1a1a1a", borderRadius: 14, padding: "26px 22px", display: "flex", flexDirection: "column" as const, gap: 6 },
   priceCardHL: { background: "#111", border: "1px solid #2a2a2a" },
-  priceHL: { fontSize: 11, color: "#666", letterSpacing: "0.06em", textTransform: "uppercase" as const },
-  priceName: { fontSize: 13, color: "#555" },
-  priceAmount: { fontSize: 38, fontWeight: 700, letterSpacing: "-0.04em", color: "#fff", lineHeight: 1, marginTop: 4 },
-  priceSearches: { fontSize: 13, color: "#777" },
-  pricePer: { fontSize: 12, color: "#3a3a3a", marginBottom: 6 },
-  priceBtn: { fontSize: 13, color: "#666", background: "#141414", border: "1px solid #222", padding: "9px 16px", borderRadius: 8, textDecoration: "none", textAlign: "center" as const, marginTop: "auto" },
+  priceHL: { fontSize: 11, color: "#555", letterSpacing: "0.06em", textTransform: "uppercase" as const, fontWeight: 500 },
+  priceName: { fontSize: 13, color: "#444", letterSpacing: "-0.01em" },
+  priceAmount: { fontSize: 38, fontWeight: 700, letterSpacing: "-0.05em", color: "#fff", lineHeight: 1, marginTop: 4 },
+  priceSearches: { fontSize: 13, color: "#666" },
+  pricePer: { fontSize: 12, color: "#2a2a2a", marginBottom: 6 },
+  priceBtn: { fontSize: 13, color: "#555", background: "#111", border: "1px solid #1e1e1e", padding: "9px 16px", borderRadius: 8, textDecoration: "none", textAlign: "center" as const, marginTop: "auto", letterSpacing: "-0.01em" },
   priceBtnHL: { background: "#fff", color: "#000", border: "1px solid #fff" },
-  pricingFootnote: { fontSize: 13, color: "#333", textAlign: "center" as const },
+  pricingFootnote: { fontSize: 13, color: "#2a2a2a", textAlign: "center" as const },
   footer: { borderTop: "1px solid #141414", padding: "32px 0" },
   footerInner: { maxWidth: 1100, margin: "0 auto", padding: "0 32px", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap" as const, gap: 16 },
-  footerLogo: { fontSize: 14, fontWeight: 600, color: "#333" },
-  footerLinks: { display: "flex", gap: 24 },
-  footerLink: { fontSize: 13, color: "#333", textDecoration: "none" },
-  footerCopy: { fontSize: 13, color: "#2a2a2a" },
+  footerLogo: { fontSize: 14, fontWeight: 600, color: "#2a2a2a", letterSpacing: "-0.02em" },
+  footerLinks: { display: "flex", gap: 24, flexWrap: "wrap" as const },
+  footerLink: { fontSize: 13, color: "#2a2a2a", textDecoration: "none" },
+  footerCopy: { fontSize: 13, color: "#222" },
 };
